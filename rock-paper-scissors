@@ -1,1 +1,70 @@
 
+// Function to get the user's choice
+const getUserChoice = userInput => {
+  // Convert the userInput to lowercase to handle case-insensitivity
+  userInput = userInput.toLowerCase();
+
+  // Check if the userInput is a valid choice ('rock', 'paper', 'scissors', or 'bomb')
+  if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors' || userInput === 'bomb') {
+    // If it's valid, return the userInput
+    return userInput;
+  } else {
+    // If it's not valid, log an error message and prompt the user to try again
+    console.log('Input invalid. Try again with "rock", "paper", "scissors", or "bomb".');
+  }
+};
+
+// Function to determine the winner between userChoice and computerChoice
+const determineWinner = (userChoice, computerChoice) => {
+  // If the userChoice is the same as the computerChoice, it's a tie
+  if (userChoice === computerChoice) {
+    return 'The game is a tie!';
+  }
+
+  // If the userChoice is 'bomb', the user wins regardless of the computer's choice
+  if (userChoice === 'bomb') {
+    return 'You won! "Bomb" beats any other choice.';
+  }
+
+  // Rest of the logic to determine the winner between 'rock', 'paper', and 'scissors'
+  if ((userChoice === 'rock' && computerChoice === 'paper') ||
+      (userChoice === 'paper' && computerChoice === 'scissors') ||
+      (userChoice === 'scissors' && computerChoice === 'rock')) {
+    return 'The computer won!';
+  } else {
+    return 'You won!';
+  }
+};
+
+// Function to get the computer's choice randomly
+const getComputerChoice = () => {
+  // Generate a random number between 0 and 2
+  const randomNumber = Math.floor(Math.random() * 3);
+
+  // Use the random number to select 'rock', 'paper', or 'scissors' for the computer
+  switch (randomNumber) {
+    case 0:
+      return 'rock';
+    case 1:
+      return 'paper';
+    case 2:
+      return 'scissors';
+  }
+};
+
+// Function to play the game
+const playGame = userChoice => {
+  // Get the user's choice and the computer's choice
+  userChoice = getUserChoice(userChoice);
+  const computerChoice = getComputerChoice();
+
+  // Log the choices made by the user and the computer
+  console.log('You threw: ' + userChoice);
+  console.log('The computer threw: ' + computerChoice);
+
+  // Determine the winner and log the result
+  console.log(determineWinner(userChoice, computerChoice));
+};
+
+// Play the game with the user's choice (replace 'scissors' with the choice you want)
+playGame('scissors');
